@@ -18,28 +18,47 @@
 
 
         <record id="action_add_user" model="ir.actions.act_window">
-            <field name="name">Customer Details Report</field>
+            <field name="name">Creating a Report</field>
             <field name="res_model">some_model</field>
             <field name="view_mode">form</field>
-
         </record>
 
-        <menuitem id="menu_customer_details"
-                  name="Users Module"
+        <record id="action_format_report" model="ir.actions.act_window">
+            <field name="name">Formating a Report</field>
+            <field name="res_model">some_model</field>
+            <field name="view_mode">form</field>
+        </record>
+
+        <record id="action_feedback" model="ir.actions.act_window">
+            <field name="name">Formating a Report</field>
+            <field name="res_model">some_model</field>
+            <field name="view_mode">form</field>
+        </record>
+
+        <menuitem id="menu_report_root"
+                  name="Модуль отчетов"
                   sequence="1"
                   groups="base.group_user"/>  
 
-        <menuitem id="menu_customer_details_main_reports"
-                  name="Options"
-                  parent="menu_customer_details"
-                  sequence="0"
+        <menuitem id="menu_formating"
+                  name="Форматировать отчет"
+                  parent="menu_report_root"
+                  action="action_format_report"
+                  sequence="1"
                   groups="base.group_user"/>  
 
-        <menuitem id="menu_customer_details_report"
-                  name="Creating Users"
-                  parent="menu_customer_details_main_reports"
+        <menuitem id="menu_creating"
+                  name="Создать отчет"
+                  parent="menu_report_root"
                   action="action_add_user"
-                  sequence="0"
+                  sequence="5"
+                  groups="base.group_user"/>
+
+        <menuitem id="menu_feedback"
+                  name="Отправить обратную связь"
+                  parent="menu_report_root"
+                  action="action_feedback"
+                  sequence="10"
                   groups="base.group_user"/>  
 
     </data>
