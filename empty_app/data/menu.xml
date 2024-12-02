@@ -1,37 +1,81 @@
 <odoo>
     <data>
         <!-- Form View -->
-        <record id="view_some_model_form" model="ir.ui.view">
-            <field name="name">some.model.form</field>
-            <field name="model">some_model</field>
+        <record id="view_report" model="ir.ui.view">
+            <field name="name">report.model.form</field>
+            <field name="model">report</field>
             <field name="arch" type="xml">
                 <form string="Some Model Form">
                     <sheet>
                         <group>
-                            <field name="name" />
-                            <field name="password"/>
+                            <field name="name" placeholder="Необязательное поле"/>
                         </group>
+                        <group>
+                            <field name="file_b" />
+                            <field name="file_w"/>
+                        </group>
+                        <button name="send" type="object" class="btn btn-primary">Отправить</button>
                     </sheet>
                 </form>
             </field>
         </record>
 
+        <record id="view_format" model="ir.ui.view">
+            <field name="name">format.model.form</field>
+            <field name="model">format</field>
+            <field name="arch" type="xml">
+                <form string="Some Model Form">
+                    <sheet>
+                        <group>
+                            <field name="name" placeholder="Необязательное поле"/>
+                        </group>
+                        <group>
+                            <field name="file_f"/>
+                        </group>
+                        <button name="send" type="object" class="btn btn-primary">Отправить</button>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="view_feedback" model="ir.ui.view">
+            <field name="name">feedback.model.form</field>
+            <field name="model">feedback</field>
+            <field name="arch" type="xml">
+                <form string="Some Model Form">
+                    <sheet>
+                        <group>
+                            <field name="name"/>
+                            <field name="review" placeholder="Обратная связь"/>
+                            <field name="file"/>
+                        </group>
+                        <button name="send" type="object" class="btn btn-primary">Отправить</button>
+                    </sheet>
+                </form>
+            </field>
+        </record>
 
         <record id="action_add_user" model="ir.actions.act_window">
             <field name="name">Creating a Report</field>
-            <field name="res_model">some_model</field>
+            <field name="res_model">report</field>
             <field name="view_mode">form</field>
         </record>
 
         <record id="action_format_report" model="ir.actions.act_window">
             <field name="name">Formating a Report</field>
-            <field name="res_model">some_model</field>
+            <field name="res_model">format</field>
             <field name="view_mode">form</field>
         </record>
 
         <record id="action_feedback" model="ir.actions.act_window">
-            <field name="name">Formating a Report</field>
-            <field name="res_model">some_model</field>
+            <field name="name">Senfing a Feedback</field>
+            <field name="res_model">feedback</field>
+            <field name="view_mode">form</field>
+        </record>
+
+        <record id="action_admin" model="ir.actions.act_window">
+            <field name="name">Senfing a Feedback</field>
+            <field name="res_model">report</field>
             <field name="view_mode">form</field>
         </record>
 
@@ -59,7 +103,14 @@
                   parent="menu_report_root"
                   action="action_feedback"
                   sequence="10"
-                  groups="base.group_user"/>  
+                  groups="base.group_user"/>
+
+        <menuitem id="menu_admin"
+                  name="Администрирование"
+                  parent="menu_report_root"
+                  action="action_admin"
+                  sequence="20"
+                  groups="base.group_user"/> 
 
     </data>
 </odoo>
