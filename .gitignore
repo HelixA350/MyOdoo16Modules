@@ -1,2 +1,3 @@
+*/__pycache__/
 empty_app/__pycache__/
-empty_app/models/__pycache__/some_model.cpython-312.pyc
+empty_app/models/__pycache__/
