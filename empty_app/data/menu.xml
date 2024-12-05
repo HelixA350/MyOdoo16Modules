@@ -68,14 +68,14 @@
         </record>
 
         <record id="action_feedback" model="ir.actions.act_window">
-            <field name="name">Senfing a Feedback</field>
+            <field name="name">Sending a Feedback</field>
             <field name="res_model">feedback</field>
             <field name="view_mode">form</field>
         </record>
 
         <record id="action_admin" model="ir.actions.act_window">
-            <field name="name">Senfing a Feedback</field>
-            <field name="res_model">report</field>
+            <field name="name">Admin view</field>
+            <field name="res_model">stats</field>
             <field name="view_mode">form</field>
         </record>
 
