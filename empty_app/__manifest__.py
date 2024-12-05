@@ -4,7 +4,7 @@
     'application': True,
     'auto_install': False,
     'data' : [
-        'data/users_data.xml',
+        'data/menus.xml',
         'secutity/ir.model.access.csv',
         'data/menu.xml',
 ]

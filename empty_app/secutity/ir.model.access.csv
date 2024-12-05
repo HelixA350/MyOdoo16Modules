@@ -1,2 +1,6 @@
 id,name,model_id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
-access_some_model,access_some_model,some_model,base.group_user,1,1,1,1
+access_some_model,access_some_model,report,base.group_user,1,1,1,1
+access_some_model_2,access_some_model_2,feedback,base.group_user,1,1,1,1
+access_some_model_3,access_some_model_3,format,base.group_user,1,1,1,1
+
+
