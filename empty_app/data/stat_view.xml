@@ -1,0 +1,11 @@
+<odoo>
+    <data>
+        <record id="view_dashboard_stats" model="ir.ui.view">
+            <field name="name">stats.dashboard</field>
+            <field name="model">stats</field>
+            <field name="arch" type="xml">
+                <button name="get_my_model_data" type="object" class="btn btn-primary">Отправить</button>
+            </field>
+        </record>
+    </data>
+</odoo>
