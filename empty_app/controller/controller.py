@@ -35,7 +35,7 @@ class DownloadController(http.Controller):
             ]
         )
     
-class DownloadController(http.Controller):
+class DownloadController2(http.Controller):
     @http.route('/your_module/download_creating', type='http', auth='user', methods=['GET'], csrf=True)
     def download_file(self, model_id, **kwargs):
         # Получаем объект записи из указанной модели
