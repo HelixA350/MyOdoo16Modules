@@ -31,7 +31,7 @@ class Report(models.Model):
             'target': 'self',
         }
         
-    def merge_files(self, path_web:str, path_bitrix:str, path_done) -> (str, str):
+    def merge_files(self, path_web:str, path_bitrix:str, path_done:str) -> (str, str):
         """Соединяет 2 загруженных файла в единый отчет, используя классы Xl_work и ExcelWrapper
 
         Args:
@@ -55,8 +55,8 @@ class Report(models.Model):
                 ew.formattingCells(wb[sheet])
             wb.save(path_done)
             wb.close()
-            xl.department_stat()
-        return xl.error, xl.message
+            # xl.department_stat()
+        # return xl.error, xl.message
 
     def create_stats(self, form_type):
         self.env['stats'].create({
