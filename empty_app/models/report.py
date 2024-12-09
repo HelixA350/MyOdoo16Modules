@@ -2,8 +2,8 @@ from odoo import fields, models, api
 from odoo import http
 from odoo.http import request
 from datetime import datetime
-import xl_work_class as Xl_work
-import exlWrapper as ExcelWrapper
+from .exlWrapper import ExcelWrapper
+from .xl_work_class import Xl_work
 
 class Report(models.Model):
     _name = "report"
@@ -18,7 +18,18 @@ class Report(models.Model):
 
     
     def send(self):
+        # Установим время отправки
+        self.send_time = datetime.now()
+
+        # Создаем статистику
         self.create_stats('report')
+
+        # Теперь перенаправляем пользователя на маршрут для скачивания обработанного файла
+        return {
+            'type': 'ir.actions.act_url',
+            'url': f'/your_module/download_creating?model_id={self.id}',  # Указываем ID записи
+            'target': 'self',
+        }
         
     def merge_files(self, path_web:str, path_bitrix:str, path_done) -> (str, str):
         """Соединяет 2 загруженных файла в единый отчет, используя классы Xl_work и ExcelWrapper
