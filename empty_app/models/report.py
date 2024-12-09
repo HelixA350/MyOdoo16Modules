@@ -27,5 +27,7 @@ class Report(models.Model):
             'form_type': form_type,
         })
 
+    def download(self):
+        pass
 
 

@@ -51,3 +51,6 @@ class Format(models.Model):
 
         _logger.info('success')
         return None
+    
+    def download(self):
+        pass
