@@ -41,16 +41,30 @@ class Format(models.Model):
         wb.close()
 
     def send(self):
-        file_data = base64.b64decode(self.file_f)  # Декодируем переданный файл
-        xlsx_data = io.BytesIO(file_data)  # Конвертируем в поток
-        
-        self.format_file(xlsx_data, xlsx_data)
+        # Установим время отправки
         self.send_time = datetime.now()
 
+        # Создаем статистику
         self.create_stats('report')
 
-        _logger.info('success')
-        return None
+        # Теперь перенаправляем пользователя на маршрут для скачивания обработанного файла
+        return {
+            'type': 'ir.actions.act_url',
+            'url': f'/your_module/download_formating?model_id={self.id}',  # Указываем ID записи
+            'target': 'self',
+        }
     
     def download(self):
-        pass
+        # Путь к вашему файлу на сервере
+        file_path = r'files/finished_report (7).xlsx'
+        
+        with open(file_path, 'rb') as file:
+            file_content = file.read()
+
+        return {
+            'type': 'ir.actions.act_url',
+            'url': 'data:text/plain;base64,' + base64.b64encode(file_content).decode(),
+            'target': 'self',
+            'download': True,
+            'filename': 'downloaded_file.xlsx',
+        }

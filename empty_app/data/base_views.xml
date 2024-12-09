@@ -17,7 +17,6 @@
                         </group>
                         <group>
                             <button name="send" type="object" class="btn btn-primary">Отправить</button>
-                            <button name="download" type="object" class="btn btn-secondary">Скачать</button>
                         </group>
                     </sheet>
                 </form>
@@ -39,7 +38,6 @@
                         </group>
                         <group>
                             <button name="send" type="object" class="btn btn-primary">Отправить</button>
-                            <button name="download" type="object" class="btn btn-secondary">Скачать</button>
                         </group>
                     </sheet>
                 </form>
