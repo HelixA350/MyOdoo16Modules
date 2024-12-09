@@ -1,5 +1,7 @@
 from odoo import fields, models
 from odoo import models, fields, api
+from odoo.http import Controller, request, route, request
+import json
 import base64
 import openpyxl
 import io
@@ -25,6 +27,7 @@ class Format(models.Model):
         for sheet in wb.sheetnames[2:]:
             ew.formatTitles(wb[sheet], True)
             ew.formattingCells(wb[sheet])
+        _logger.info('Done!, the file was in: ' + str(path_file))
         wb.save(path_done)
         wb.close()
 
@@ -35,4 +38,18 @@ class Format(models.Model):
         self.format_file(xlsx_data, xlsx_data)
 
         _logger.info('success')
-        return None
+        return request.make_response('Hi')
+
+class MyController(Controller):
+    @route('/web/dataset/call_button/format/send', methods=['POST'], type='http', auth='public')
+    def handler(self):
+        Format.send()
+        print('The POST')
+        data = json.dumps({
+            'status': 'pass',
+            'files': {'report.xlsx': request.FILES},
+        })
+        headers = [('Content-Type', 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'),
+                   ('csrf', request.csrf_token())]
+        
+        return request.make_response(data, headers)
