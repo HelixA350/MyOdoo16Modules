@@ -19,7 +19,6 @@ class Format(models.Model):
     add_avr_time = fields.Boolean(string='Считать среднюю наработку')
     send_time = fields.Datetime(string='Send Time', default=lambda self: fields.Datetime.now())
 
-
     file_f = fields.Binary(required=True, string='Форматировать')
 
     def create_stats(self, form_type):
@@ -31,9 +30,9 @@ class Format(models.Model):
         })
 
 
-    def format_file(self, path_file:str, path_done:str) -> str:
+    def format_file(self, path_file:str, path_done:str, addAverage) -> str:
         ew = ExcelWrapper(['Вложения', 'Последний раз обновлено', 'Статус', 'Наименование сервисного центра'], ['ПЭ: дата время', 'ПЭ: Комментарий', 'ПЭ: наработка м/ч'], path_file)
-        ew.format()
+        ew.format(addAverage=addAverage)
         wb = oxl.load_workbook(filename=path_file)
         for sheet in wb.sheetnames[2:]:
             ew.formatTitles(wb[sheet], True)

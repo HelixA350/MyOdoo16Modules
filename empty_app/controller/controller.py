@@ -6,7 +6,7 @@ import logging
 
 _logger = logging.getLogger(__name__)
 
-class DownloadController(http.Controller):
+class FormatingDownloadController(http.Controller):
     @http.route('/your_module/download_formating', type='http', auth='user', methods=['GET'], csrf=True)
     def download_file(self, model_id, **kwargs):
         # Получаем объект записи из указанной модели
@@ -16,9 +16,10 @@ class DownloadController(http.Controller):
         file_data = base64.b64decode(record.file_f)
         xlsx_data_input = io.BytesIO(file_data)
         xlsx_data_output = io.BytesIO()
+        addAvr = record.add_avr_time
 
         # Вызываем функцию format_file из модели
-        record.format_file(xlsx_data_input, xlsx_data_output)
+        record.format_file(xlsx_data_input, xlsx_data_output, addAvr)
 
         # Получаем содержимое обработанного файла
         xlsx_content = xlsx_data_output.getvalue()
@@ -35,7 +36,7 @@ class DownloadController(http.Controller):
             ]
         )
     
-class DownloadController2(http.Controller):
+class CreatingDownloadController(http.Controller):
     @http.route('/your_module/download_creating', type='http', auth='user', methods=['GET'], csrf=True)
     def download_file(self, model_id, **kwargs):
         # Получаем объект записи из указанной модели

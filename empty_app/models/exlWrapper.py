@@ -82,6 +82,18 @@ class ExcelWrapper: #
             el.font = Font(name="Times New Roman", bold=True, size=12)
             el.value = names[index]
         ws.auto_filter.ref = ws.dimensions
+    
+    def addAverageTime(self, ws):
+        tracktors = list()
+        total_sum = 0
+        for index, row in enumerate(ws.rows, start=0):
+            if index == 0:
+                continue
+            if row[1].value not in tracktors:
+                tracktors.append(row[1].value)
+                total_sum += int(row[4].value)
+        ws[f'D{ws.max_row+1}'] = 'Средняя наработка'
+        ws[f'E{ws.max_row}'] = str(total_sum//len(tracktors))
 
     def formattingCells(self, ws) -> None: 
         """Форматирует ячейки таблицы:
@@ -110,7 +122,7 @@ class ExcelWrapper: #
                                 cell.value = cell.value[:each+2] + '\n' + cell.value[each+2:]
                                 ad += 1
     
-    def format(self) -> None:
+    def format(self, addAverage=False) -> None:
         """Применяет все форматирование
         """
         # Удаляем лишнее
@@ -121,6 +133,7 @@ class ExcelWrapper: #
         self.formatTitles(self.ws, False)
         # Форматируем размеры ячеек
         self.formattingCells(self.ws)
+        if addAverage: self.addAverageTime(self.ws)
         self.save(self.path)
 
     def save(self, path: str) -> None:
