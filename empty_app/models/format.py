@@ -16,6 +16,7 @@ class Format(models.Model):
     _description = "some model for testing"
 
     name = fields.Char(required=False, string="Имя")
+    add_avr_time = fields.Boolean(string='Считать среднюю наработку')
     send_time = fields.Datetime(string='Send Time', default=lambda self: fields.Datetime.now())
 
 

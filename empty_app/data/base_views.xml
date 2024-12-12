@@ -35,6 +35,7 @@
                         </group>
                         <group>
                             <field name="file_f"/>
+                            <field name="add_avr_time"/>
                         </group>
                         <group>
                             <button name="send" type="object" class="btn btn-primary">Отправить</button>
